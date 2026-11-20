@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ativo;
+use App\Models\Categoria;
 use App\Models\Historico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,16 +12,58 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AtivoController extends Controller
 {
-    public function index()
+    // ABRIR TELA DE CADASTRO
+    public function create()
     {
-        $ativos = Ativo::with(['categoria', 'local', 'usuario'])
-            ->orderBy('nome')
-            ->get();
+        $categorias = Categoria::orderBy('nome')->get();
+        $locais = \App\Models\Local::orderBy('nome')->get();
 
-        return response()->json($ativos);
+        return view('cadastro', compact('categorias', 'locais'));
     }
 
-    // Cadastrar equipamento e gerar QR Code
+    // LISTAR EQUIPAMENTOS
+    public function index(Request $request)
+    {
+        $consulta = Ativo::with(['categoria', 'local', 'usuario'])
+            ->orderBy('nome');
+
+        if ($request->filled('busca')) {
+            $busca = $request->busca;
+
+            $consulta->where(function ($query) use ($busca) {
+                $query->where('nome', 'like', "%{$busca}%")
+                    ->orWhere('patrimonio', 'like', "%{$busca}%")
+                    ->orWhere('numero_serie', 'like', "%{$busca}%")
+                    ->orWhereHas('usuario', function ($usuario) use ($busca) {
+                        $usuario->where('name', 'like', "%{$busca}%");
+                    });
+            });
+        }
+
+        $limiteAtualizacao = now()->subHours(72);
+
+        if ($request->status === 'sem_localizacao') {
+            $consulta->whereNull('local_id');
+
+        } elseif ($request->status === 'atualizacao') {
+            $consulta->whereNotNull('local_id')
+                ->where('updated_at', '<=', $limiteAtualizacao);
+
+        } elseif ($request->status === 'localizado') {
+            $consulta->whereNotNull('local_id')
+                ->where('updated_at', '>', $limiteAtualizacao);
+        }
+
+        $ativos = $consulta->get();
+
+        if ($request->expectsJson()) {
+            return response()->json($ativos);
+        }
+
+        return view('ativos', compact('ativos', 'limiteAtualizacao'));
+    }
+
+    // CADASTRAR EQUIPAMENTO E GERAR QR CODE
     public function store(Request $request)
     {
         $dados = $request->validate([
@@ -39,7 +82,6 @@ class AtivoController extends Controller
         $ativo = DB::transaction(function () use ($dados) {
             $ativo = Ativo::create($dados);
 
-            // Registrar localização inicial no histórico
             if ($ativo->local_id !== null) {
                 Historico::create([
                     'ativo_id' => $ativo->id,
@@ -55,45 +97,52 @@ class AtivoController extends Controller
             return $ativo;
         });
 
-        // Gerar QR Code com a rota de leitura do equipamento
         $url = route('leitura.qrcode', ['id' => $ativo->id]);
 
         $qrCode = QrCode::format('svg')
             ->size(300)
             ->generate($url);
 
-        // Salvar QR Code no armazenamento público
         $caminhoQrCode = 'qrcodes/ativo-' . $ativo->id . '.svg';
 
         Storage::disk('public')->put($caminhoQrCode, $qrCode);
 
-        // Salvar o caminho do QR Code no banco
         $ativo->update([
             'qr_code' => $caminhoQrCode
         ]);
 
-        return response()->json([
-            'mensagem' => 'Equipamento cadastrado com sucesso!',
-            'ativo' => $ativo->fresh()
-        ], 201);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'mensagem' => 'Equipamento cadastrado com sucesso!',
+                'ativo' => $ativo->fresh()
+            ], 201);
+        }
+
+        return redirect()->route('ativos.create')
+            ->with('sucesso', 'Equipamento cadastrado com sucesso!')
+            ->with('qrCode', Storage::disk('public')->url($caminhoQrCode))
+            ->with('codigoEtiqueta', $ativo->patrimonio);
     }
 
-    // Exibir equipamento
+    // EXIBIR DETALHES DO ATIVO
     public function show($id)
     {
         $ativo = Ativo::with([
             'categoria',
             'local',
-            'usuario',
-            'historicos.localAnterior',
-            'historicos.localNovo',
-            'historicos.usuario'
+            'usuario'
         ])->findOrFail($id);
 
-        return response()->json($ativo);
+        $historicos = $ativo->historicos()
+            ->with(['localNovo', 'usuario'])
+            ->orderByDesc('data_movimentacao')
+            ->take(3)
+            ->get();
+
+        return view('detalhes', compact('ativo', 'historicos'));
     }
 
-    // Atualizar equipamento
+    // ATUALIZAR EQUIPAMENTO
     public function update(Request $request, $id)
     {
         $ativo = Ativo::findOrFail($id);
@@ -120,7 +169,6 @@ class AtivoController extends Controller
 
             $ativo->update($dados);
 
-            // Registrar histórico somente se o local mudou
             if ($localAnterior != $novoLocal) {
                 Historico::create([
                     'ativo_id' => $ativo->id,
@@ -140,7 +188,7 @@ class AtivoController extends Controller
         ]);
     }
 
-    // Excluir equipamento
+    // EXCLUIR EQUIPAMENTO
     public function destroy($id)
     {
         $ativo = Ativo::findOrFail($id);

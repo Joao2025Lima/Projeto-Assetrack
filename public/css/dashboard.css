@@ -348,6 +348,7 @@ body {
     display: grid;
     grid-template-columns: 1.35fr 1fr;
     gap: 16px;
+    margin-bottom: 16px;
 }
 
 .painel {
@@ -574,6 +575,99 @@ body {
     background: #e6a000;
 }
 
+/* ATIVOS CRÍTICOS */
+
+.painel-criticos {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 17px;
+}
+
+.painel-criticos .painel-cabecalho {
+    margin-bottom: 18px;
+}
+
+.atualizado {
+    font-size: 9px;
+    color: #34445b;
+    border: 1px solid #dce3eb;
+    background: #fbfcfe;
+    border-radius: 5px;
+    padding: 5px 9px;
+    white-space: nowrap;
+}
+
+.tabela-responsiva {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabela-criticos {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 10px;
+}
+
+.tabela-criticos th {
+    color: #687588;
+    font-weight: 600;
+    padding: 12px 7px;
+    border-bottom: 1px solid #e0e5ec;
+    white-space: nowrap;
+}
+
+.tabela-criticos td {
+    padding: 10px 7px;
+    border-bottom: 1px solid #e0e5ec;
+    color: #26364a;
+    vertical-align: middle;
+}
+
+.tabela-criticos tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-criticos td:first-child {
+    min-width: 190px;
+}
+
+.tabela-criticos td strong {
+    display: block;
+    font-size: 10px;
+    color: #1c2b40;
+    margin-bottom: 3px;
+}
+
+.tabela-criticos td small {
+    display: block;
+    font-size: 9px;
+    color: #687588;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.localizado {
+    background: #239c6a;
+}
+
+.sem-atualizacao {
+    background: #e5a000;
+    color: #26364a;
+}
+
+.sem-localizacao {
+    background: #d73543;
+}
+
 /* RESPONSIVIDADE */
 
 @media (max-width: 950px) {
@@ -636,6 +730,14 @@ body {
 
     .usuario strong {
         display: none;
+    }
+
+    .painel-criticos {
+        padding: 12px;
+    }
+
+    .tabela-criticos {
+        min-width: 700px;
     }
 
 }

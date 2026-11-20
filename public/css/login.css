@@ -616,3 +616,23 @@ body {
         font-size: 22px;
     }
 }
+
+.erro-validacao {
+    color: #dc2626;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.campo input.is-invalid {
+    border-color: #dc2626;
+}
+
+.alerta-erro {
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #fecaca;
+    border-radius: 5px;
+    background: #fef2f2;
+    color: #b91c1c;
+    font-size: 12px;
+}

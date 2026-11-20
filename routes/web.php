@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::middleware('auth')->group(function () {
 
     // DASHBOARD
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
     // CATEGORIAS
     Route::get('/categorias', [CategoriaController::class, 'index'])
@@ -56,6 +58,11 @@ Route::middleware('auth')->group(function () {
         ->name('locais.destroy');
 
     // EQUIPAMENTOS (ATIVOS)
+
+    // Cadastro precisa vir antes da rota /ativos/{id}
+    Route::get('/ativos/create', [AtivoController::class, 'create'])
+        ->name('ativos.create');
+
     Route::get('/ativos', [AtivoController::class, 'index'])
         ->name('ativos.index');
 
@@ -75,7 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/leitura/{id}', [AtivoController::class, 'show'])
         ->name('leitura.qrcode');
 
-    // HISTÓRICO DE MOVIMENTAÇÕES
+    // HISTÓRICO
     Route::get('/historicos', [HistoricoController::class, 'index'])
         ->name('historicos.index');
 
@@ -84,7 +91,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/historicos', [HistoricoController::class, 'store'])
         ->name('historicos.store');
-
 });
 
 // PÁGINA INICIAL

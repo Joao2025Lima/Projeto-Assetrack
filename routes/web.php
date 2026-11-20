@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\LocalController;
 use App\Http\Controllers\AtivoController;
 use App\Http\Controllers\HistoricoController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
@@ -20,9 +21,7 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::middleware('auth')->group(function () {
 
     // DASHBOARD
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // CATEGORIAS
     Route::get('/categorias', [CategoriaController::class, 'index'])

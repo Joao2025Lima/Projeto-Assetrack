@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+    color: #263449;
+}
+
+/* ESTRUTURA PRINCIPAL */
+
+.tela-sistema {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* MENU LATERAL */
+
+.menu-lateral {
+    width: 230px;
+    min-width: 230px;
+    background-color: #0b192c;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    height: 75px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #26364b;
+}
+
+.logo-icone {
+    width: 32px;
+    height: 32px;
+    background-color: #2878db;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.logo h2 {
+    font-size: 16px;
+}
+
+.logo p {
+    font-size: 10px;
+    color: #9aa9bd;
+    margin-top: 3px;
+}
+
+.lista-menu {
+    list-style: none;
+    padding: 15px 10px;
+}
+
+.lista-menu li {
+    margin-bottom: 5px;
+}
+
+.lista-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 12px;
+    color: #c1cada;
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.lista-menu a span {
+    font-size: 15px;
+}
+
+.lista-menu a:hover,
+.lista-menu a.ativo {
+    background-color: #20334e;
+    color: white;
+}
+
+.lista-menu a.ativo {
+    border-left: 3px solid #3b82f6;
+}
+
+/* QUADRO QR + GPS */
+
+.gps-lateral {
+    margin: auto 12px 18px;
+    padding: 13px;
+    background-color: #172b44;
+    border-radius: 7px;
+}
+
+.gps-lateral h4 {
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.gps-lateral p {
+    font-size: 10px;
+    color: #b9c6d7;
+    margin-bottom: 8px;
+}
+
+.gps-lateral span {
+    font-size: 9px;
+    color: #4ade80;
+}
+
+/* CONTEÚDO PRINCIPAL */
+
+.conteudo-principal {
+    flex: 1;
+    min-width: 0;
+    padding: 25px;
+}
+
+/* CABEÇALHO */
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.subtitulo {
+    font-size: 10px;
+    color: #8491a5;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.titulo-pagina h1 {
+    font-size: 23px;
+    margin-top: 5px;
+    color: #18283e;
+}
+
+.acoes-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icone-botao {
+    width: 33px;
+    height: 33px;
+    border: 1px solid #e3e8ef;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #526176;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.usuario-icone {
+    width: 30px;
+    height: 30px;
+    background-color: #e4edfa;
+    color: #2465ad;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BARRA DE FERRAMENTAS */
+
+.barra-ferramentas {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: white;
+    padding: 13px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    margin-bottom: 22px;
+}
+
+.campo-pesquisa {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #dfe5ed;
+    border-radius: 5px;
+    padding: 0 10px;
+    height: 36px;
+}
+
+.campo-pesquisa span {
+    font-size: 18px;
+    color: #8290a4;
+}
+
+.campo-pesquisa input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 11px;
+    color: #35445a;
+}
+
+.filtro-status {
+    height: 36px;
+    width: 145px;
+    border: 1px solid #dfe5ed;
+    border-radius: 5px;
+    padding: 0 8px;
+    background-color: white;
+    color: #46556b;
+    font-size: 11px;
+}
+
+.botao-novo {
+    height: 36px;
+    padding: 0 15px;
+    background-color: #1768c5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botao-novo:hover {
+    background-color: #1056a5;
+}
+
+/* INVENTÁRIO */
+
+.inventario {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.inventario-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.inventario-cabecalho h2 {
+    font-size: 16px;
+    color: #24344b;
+    margin-bottom: 6px;
+}
+
+.inventario-cabecalho p {
+    font-size: 11px;
+    color: #8a96a8;
+}
+
+.botao-filtros {
+    background-color: white;
+    border: 1px solid #dfe5ed;
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: #46556b;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+/* TABELA */
+
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+thead {
+    background-color: #f8f9fc;
+}
+
+th {
+    padding: 13px 10px;
+    font-size: 10px;
+    color: #7b8799;
+    font-weight: bold;
+    border-bottom: 1px solid #e9edf2;
+}
+
+td {
+    padding: 13px 10px;
+    font-size: 10px;
+    color: #59677a;
+    border-bottom: 1px solid #edf0f4;
+}
+
+tbody tr {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+    background-color: #f3f7fc;
+}
+
+td strong {
+    display: block;
+    font-size: 11px;
+    color: #29394f;
+    margin-bottom: 5px;
+}
+
+td small {
+    display: block;
+    color: #929eae;
+    font-size: 9px;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.localizado {
+    background-color: #d9f5e5;
+    color: #15803d;
+}
+
+.atualizacao {
+    background-color: #fff0c7;
+    color: #b77908;
+}
+
+.sem-localizacao {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+    .menu-lateral {
+        width: 190px;
+        min-width: 190px;
+    }
+
+    .conteudo-principal {
+        padding: 15px;
+    }
+
+    .barra-ferramentas {
+        flex-wrap: wrap;
+    }
+
+    .campo-pesquisa {
+        min-width: 100%;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .tela-sistema {
+        flex-direction: column;
+    }
+
+    .menu-lateral {
+        width: 100%;
+    }
+
+    .lista-menu {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .gps-lateral {
+        display: none;
+    }
+
+    .cabecalho {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+}

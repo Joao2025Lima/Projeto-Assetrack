@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -24,38 +23,21 @@
 
     // Recebe os três históricos enviados pelo AtivoController
     $historicosRecentes = $historicos;
+
+    // Último usuário que movimentou o ativo
+    $ultimoUsuario = $historicosRecentes->first()?->usuario?->name;
+
+    // Link do Google Maps: usa o link do local, se existir; senão busca pelo nome
+    $linkMaps = null;
+    if ($ativo->local) {
+        $linkMaps = $ativo->local->link_maps
+            ?: 'https://www.google.com/maps/search/?api=1&query=' . urlencode($ativo->local->nome);
+    }
 @endphp
 
 <div class="tela-sistema">
 
-    <aside class="menu-lateral">
-        <div class="logo">
-            <div class="logo-icone">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V6l8-3 8 3v12l-8 3-8-3Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/><path d="m8 9 4 2 4-2M12 11v6"/></svg>
-            </div>
-            <div><h2>AsseTrack</h2><p>Gestão de ativos</p></div>
-        </div>
-
-        <nav>
-            <ul class="lista-menu">
-                <li><a href="{{ route('login') }}"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-7h6v7"/></svg>Login</a></li>
-                <li><a href="{{ route('dashboard') }}"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a></li>
-                <li><a href="{{ route('ativos.index') }}"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/><path d="M7 3v4M7 10v4M7 17v4"/></svg>Lista de ativos</a></li>
-                <li><a href="{{ route('ativos.create') }}"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Cadastro de ativo</a></li>
-                <li><a href="{{ route('ativos.show', $ativo->id) }}" class="ativo"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 8h8v8H8z"/></svg>Detalhes do ativo</a></li>
-                <li><a href="{{ route('leitura.qrcode', $ativo->id) }}"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h2v2h-2zM18 14h2v6h-2zM14 18h2v2h-2z"/></svg>Leitura de QR Code</a></li>
-                <li><a href="{{ route('ativos.index') }}"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>Registro por GPS</a></li>
-                <li><a href="{{ route('ativos.index') }}"><svg viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z"/><path d="M9 3v15M15 6v15"/></svg>Mapa de ativos</a></li>
-                <li><a href="{{ route('historicos.index') }}"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>Histórico</a></li>
-            </ul>
-        </nav>
-
-        <div class="gps-lateral">
-            <h4><span class="mini-diamond">◆</span> QR + GPS ativo</h4>
-            <p>Registros móveis sincronizados com mapa corporativo em tempo real.</p>
-            <span><i></i> Sistema operacional</span>
-        </div>
-    </aside>
+    @include('partials.sidebar')
 
     <main class="conteudo-principal">
         <header class="cabecalho">
@@ -176,27 +158,29 @@
                         Ler QR Code
                     </a>
 
-                    <a href="{{ route('ativos.index') }}" class="botao-localizacao">
+                    <a href="{{ route('movimentar.create', $ativo->id) }}" class="botao-localizacao">
                         <svg viewBox="0 0 24 24"><path d="m12 3 2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg>
-                        Registrar localização
+                        Movimentar ativo
                     </a>
                 </section>
 
                 <section class="painel localizacao-atual">
-                    <h2>Localização atual</h2>
-                    <div class="mapa-ilustrativo">
-                        <div class="mancha-mapa mancha-um"></div>
-                        <div class="mancha-mapa mancha-dois"></div>
-                        <div class="rua rua-horizontal"></div>
-                        <div class="rua rua-vertical"></div>
-                        <div class="rua rua-diagonal"></div>
-                        <div class="marcador-mapa">
-                            <svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
-                        </div>
-                    </div>
+                    <h2>Última localização e último usuário do produto</h2>
+
                     <div class="texto-localizacao">
-                        <strong>{{ $ativo->local?->nome ?? 'Localização não registrada' }}</strong>
-                        <p>Mapa ilustrativo. Coordenadas GPS ainda não disponíveis.</p>
+                        <p><strong>Localização:</strong>
+                            @if ($linkMaps)
+                                <a href="{{ $linkMaps }}" target="_blank" rel="noopener">
+                                    {{ $ativo->local->nome }} (abrir no Google Maps)
+                                </a>
+                            @else
+                                Não registrada
+                            @endif
+                        </p>
+
+                        <p><strong>Último usuário:</strong> {{ $ultimoUsuario ?? 'Nenhuma movimentação registrada' }}</p>
+
+                        <p><strong>Atualizado em:</strong> {{ $ativo->updated_at?->format('d/m/Y H:i') ?? '—' }}</p>
                     </div>
                 </section>
             </div>

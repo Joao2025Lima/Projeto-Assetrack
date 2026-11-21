@@ -5,22 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\Historico;
 use App\Models\Ativo;
 use Illuminate\Http\Request;
+use App\Models\Local;
 
 class HistoricoController extends Controller
 {
-    public function index()
-    {
-        $historicos = Historico::with([
-            'ativo',
-            'localAnterior',
-            'localNovo',
-            'usuario'
-        ])
-        ->orderBy('data_movimentacao', 'desc')
-        ->get();
+    public function index(Request $request)
+{
+    $historicos = Historico::with([
+        'ativo',
+        'localAnterior',
+        'localNovo',
+        'usuario'
+    ])
+    ->when($request->ativo_id, fn ($q, $v) => $q->where('ativo_id', $v))
+    ->when($request->local_id, fn ($q, $v) => $q->where('local_novo_id', $v))
+    ->when($request->data, fn ($q, $v) => $q->whereDate('data_movimentacao', $v))
+    ->orderBy('data_movimentacao', 'desc')
+    ->paginate(15)
+    ->withQueryString();
 
-        return response()->json($historicos);
-    }
+    return view('historico', [
+        'historicos'     => $historicos,
+        'movimentosHoje' => Historico::whereDate('data_movimentacao', today())->count(),
+        'movimentosMes'  => Historico::whereMonth('data_movimentacao', now()->month)
+                                     ->whereYear('data_movimentacao', now()->year)
+                                     ->count(),
+        'totalMovimentos' => Historico::count(),
+        'ativos'         => Ativo::orderBy('nome')->get(),
+        'locais'         => Local::orderBy('nome')->get(),
+    ]);
+}
 
     public function show($id)
     {

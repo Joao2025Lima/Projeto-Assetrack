@@ -13,36 +13,7 @@
 
 <div class="tela-sistema">
 
-    <aside class="menu-lateral">
-
-        <div class="logo">
-            <div class="logo-icone">A</div>
-            <div>
-                <h2>AsseTrack</h2>
-                <p>Gestão de ativos</p>
-            </div>
-        </div>
-
-        <nav>
-            <ul class="lista-menu">
-                <li><a href="{{ route('dashboard') }}"><span>⌂</span> Dashboard</a></li>
-                <li><a href="{{ route('ativos.index') }}"><span>▤</span> Lista de ativos</a></li>
-                <li><a href="{{ route('ativos.create') }}" class="ativo"><span>＋</span> Cadastro de ativo</a></li>
-                <li><a href="#"><span>▣</span> Detalhes do ativo</a></li>
-                <li><a href="#"><span>▦</span> Leitura de QR Code</a></li>
-                <li><a href="#"><span>⌖</span> Registro por GPS</a></li>
-                <li><a href="#"><span>▧</span> Mapa de ativos</a></li>
-                <li><a href="{{ route('historicos.index') }}"><span>◷</span> Histórico</a></li>
-            </ul>
-        </nav>
-
-        <div class="gps-lateral">
-            <h4>◎ QR + GPS ativo</h4>
-            <p>Registros móveis sincronizados com mapa corporativo em tempo real.</p>
-            <span>● Sistema operacional</span>
-        </div>
-
-    </aside>
+    @include('partials.sidebar')
 
     <main class="conteudo-principal">
 

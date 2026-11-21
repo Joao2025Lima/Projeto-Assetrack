@@ -8,6 +8,7 @@ use App\Http\Controllers\LocalController;
 use App\Http\Controllers\AtivoController;
 use App\Http\Controllers\HistoricoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MovimentacaoController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
@@ -20,6 +21,10 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 Route::middleware('auth')->group(function () {
+    
+        // MOVIMENTAÇÃO
+    Route::get('/movimentar/{ativo}', [MovimentacaoController::class, 'create'])->name('movimentar.create');
+    Route::post('/movimentar', [MovimentacaoController::class, 'store'])->name('movimentar.store');
 
     // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])

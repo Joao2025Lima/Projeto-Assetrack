@@ -58,11 +58,11 @@
             </li>
 
             <li>
-                <a href="{{ route('ativos.index') }}">
-                    <span>▧</span> Mapa de ativos
-                </a>
+                <a href="{{ route('mapa.index') }}" class="{{ request()->routeIs('mapa.index') ? 'ativo' : '' }}">
+                 <span>▧</span> Mapa de ativos
+                 </a>
             </li>
-
+            
             <li>
                 <a href="{{ route('historicos.index') }}" class="{{ request()->routeIs('historicos.index') ? 'ativo' : '' }}">
                     <span>◷</span> Histórico

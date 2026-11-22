@@ -9,6 +9,7 @@ use App\Http\Controllers\AtivoController;
 use App\Http\Controllers\HistoricoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MovimentacaoController;
+use App\Http\Controllers\MapaController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
@@ -21,6 +22,9 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 Route::middleware('auth')->group(function () {
+
+        // MAPA DE ATIVOS (última localização e último usuário)
+    Route::get('/mapa', [MapaController::class, 'index'])->name('mapa.index');
     
         // MOVIMENTAÇÃO
     Route::get('/movimentar/{ativo}', [MovimentacaoController::class, 'create'])->name('movimentar.create');

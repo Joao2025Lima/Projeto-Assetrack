@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsseTrack - Leitura de QR Code</title>
+    <link rel="stylesheet" href="leitura.css">
+</head>
+
+<body>
+
+    <div class="tela-sistema">
+
+        <!-- MENU LATERAL -->
+
+        <aside class="menu-lateral">
+
+            <div class="logo">
+                <div class="logo-icone">◎</div>
+
+                <div>
+                    <h2>AsseTrack</h2>
+                    <p>Gestão de ativos</p>
+                </div>
+            </div>
+
+            <nav>
+                <ul class="lista-menu">
+                    <li><a href="login.html"><span>♙</span> Login</a></li>
+                    <li><a href="dashboard.html"><span>▦</span> Dashboard</a></li>
+                    <li><a href="ativos.html"><span>▤</span> Lista de ativos</a></li>
+                    <li><a href="cadastro.html"><span>＋</span> Cadastro de ativo</a></li>
+                    <li><a href="detalhes.html"><span>◈</span> Detalhes do ativo</a></li>
+                    <li><a href="leitura.html" class="ativo"><span>▦</span> Leitura de QR Code</a></li>
+                    <li><a href="gps.html"><span>⌖</span> Registro por GPS</a></li>
+                    <li><a href="mapa.html"><span>◫</span> Mapa de ativos</a></li>
+                    <li><a href="historico.html"><span>◷</span> Histórico</a></li>
+                </ul>
+            </nav>
+
+            <div class="gps-lateral">
+                <h4>◈ QR + GPS ativo</h4>
+                <p>Registros móveis sincronizados com mapa corporativo em tempo real.</p>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+
+        <main class="conteudo-principal">
+
+            <header class="cabecalho">
+
+                <div class="titulo-pagina">
+
+                    <div class="icone-pagina">
+                        <span>▦</span>
+                    </div>
+
+                    <div>
+                        <span class="subtitulo">PROTÓTIPO EMPRESARIAL</span>
+                        <h1>Leitura de QR Code</h1>
+                    </div>
+
+                </div>
+
+                <div class="acoes-cabecalho">
+
+                    <button class="icone-botao" type="button" aria-label="Pesquisar">⌕</button>
+                    <button class="icone-botao" type="button" aria-label="Notificações">♧</button>
+
+                    <div class="usuario">
+                        <div class="usuario-icone">♙</div>
+                        <span>Guilherme</span>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- ÁREA DE LEITURA -->
+
+            <section class="area-leitura">
+
+                <!-- CELULAR / LEITOR -->
+
+                <div class="painel-celular">
+
+                    <div class="celular">
+
+                        <div class="tela-celular">
+
+                            <div class="barra-celular">
+                                <span>AsseTrack</span>
+                                <span>◉ 92%</span>
+                            </div>
+
+                            <div class="area-camera">
+
+                                <div class="moldura-camera">
+
+                                    <span class="canto canto-superior-esquerdo"></span>
+                                    <span class="canto canto-superior-direito"></span>
+                                    <span class="canto canto-inferior-esquerdo"></span>
+                                    <span class="canto canto-inferior-direito"></span>
+
+                                    <div class="qr-simbolo">
+                                        <svg viewBox="0 0 100 100" aria-label="Símbolo ilustrativo de QR Code">
+                                            <path d="M12 12h25v25H12z M18 18h13v13H18z"/>
+                                            <path d="M63 12h25v25H63z M69 18h13v13H69z"/>
+                                            <path d="M12 63h25v25H12z M18 69h13v13H18z"/>
+                                            <path d="M45 12h8v8h-8z M45 26h8v8h-8z"/>
+                                            <path d="M42 44h8v8h-8z M56 44h8v8h-8z M70 44h8v8h-8z"/>
+                                            <path d="M42 58h8v8h-8z M56 58h8v8h-8z M70 58h8v8h-8z"/>
+                                            <path d="M44 72h8v8h-8z M58 72h8v8h-8z M72 72h8v8h-8z"/>
+                                        </svg>
+                                    </div>
+
+                                </div>
+
+                                <div class="resultado-camera">
+                                    <strong>QR Code identificado</strong>
+                                    <p>Compressor de Ar Industrial - PAT-2048</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- INFORMAÇÕES DO QR CODE -->
+
+                <div class="painel-informacoes">
+
+                    <div class="titulo-painel">
+                        <h2>Leitura de QR Code</h2>
+                        <p>Fluxo móvel para identificar o equipamento antes de registrar a posição</p>
+                    </div>
+
+                    <div class="grade-dados">
+
+                        <div class="dado">
+                            <span>ATIVO ENCONTRADO</span>
+                            <strong>Compressor de Ar Industrial</strong>
+                        </div>
+
+                        <div class="dado">
+                            <span>PATRIMÔNIO</span>
+                            <strong>PAT-2048</strong>
+                        </div>
+
+                        <div class="dado">
+                            <span>NÚMERO DE SÉRIE</span>
+                            <strong>CPR-22X-9041</strong>
+                        </div>
+
+                        <div class="dado">
+                            <span>QR CODE</span>
+                            <strong>AST-QRC-2048</strong>
+                        </div>
+
+                    </div>
+
+                    <!-- CONFIRMAÇÃO -->
+
+                    <div class="confirmacao">
+
+                        <div class="icone-sucesso">✓</div>
+
+                        <div class="texto-confirmacao">
+                            <strong>Equipamento validado</strong>
+                            <p>Pronto para capturar a localização usando o GPS do celular.</p>
+                        </div>
+
+                        <button class="botao-continuar" type="button">
+                            Continuar <span>›</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

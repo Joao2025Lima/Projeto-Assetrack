@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsseTrack - Mapa de ativos</title>
+    <link rel="stylesheet" href="mapa.css">
+</head>
+
+<body>
+
+<div class="tela-sistema">
+
+    <!-- MENU LATERAL -->
+    <nav class="menu-lateral">
+
+        <div class="logo">
+            <div class="logo-icone">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"/>
+                    <circle cx="12" cy="12" r="5"/>
+                    <circle cx="12" cy="12" r="1"/>
+                    <path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/>
+                </svg>
+            </div>
+
+            <div>
+                <h2>AsseTrack</h2>
+                <p>Gestão de ativos</p>
+            </div>
+        </div>
+
+        <ul class="lista-menu">
+
+            <li>
+                <a href="login.html">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="5" y="11" width="14" height="10" rx="2"/>
+                        <path d="M8 11V7a4 4 0 0 1 8 0v4M12 15v3"/>
+                    </svg>
+                    Login
+                </a>
+            </li>
+
+            <li>
+                <a href="dashboard.html">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="4" y="4" width="7" height="7" rx="1"/>
+                        <rect x="13" y="4" width="7" height="7" rx="1"/>
+                        <rect x="4" y="13" width="7" height="7" rx="1"/>
+                        <rect x="13" y="13" width="7" height="7" rx="1"/>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="ativos.html">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="4" y="5" width="16" height="14" rx="2"/>
+                        <path d="M8 9h8M8 13h8M8 16h4"/>
+                    </svg>
+                    Lista de ativos
+                </a>
+            </li>
+
+            <li>
+                <a href="cadastro.html">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="9" cy="8" r="3"/>
+                        <path d="M3 20v-2a6 6 0 0 1 12 0v2M19 8v8M15 12h8"/>
+                    </svg>
+                    Cadastro de ativo
+                </a>
+            </li>
+
+            <li>
+                <a href="detalhes.html">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 5h16v14H4zM8 9h8M8 13h5M8 16h3"/>
+                    </svg>
+                    Detalhes do ativo
+                </a>
+            </li>
+
+            <li>
+                <a href="leitura.html">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-2zM14 18h2v2h-2z"/>
+                    </svg>
+                    Leitura de QR Code
+                </a>
+            </li>
+
+            <li>
+                <a href="gps.html">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22s8-7.2 8-13a8 8 0 1 0-16 0c0 5.8 8 13 8 13z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                    Registro por GPS
+                </a>
+            </li>
+
+            <li>
+                <a href="mapa.html" class="ativo">
+                    <svg viewBox="0 0 24 24">
+                        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/>
+                    </svg>
+                    Mapa de ativos
+                </a>
+            </li>
+
+            <li>
+                <a href="historico.html">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/>
+                        <path d="M3 3v5h5M12 7v5l3 2"/>
+                    </svg>
+                    Histórico
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="informacao-menu">
+            <div class="info-titulo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 10a12 12 0 0 1 16 0M7 13a7 7 0 0 1 10 0M10 16a3 3 0 0 1 4 0"/>
+                    <path d="M12 20h.01"/>
+                </svg>
+                <strong>QR + GPS ativo</strong>
+            </div>
+
+            <p>Registros móveis sincronizados com mapa corporativo em tempo real</p>
+        </div>
+
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo-principal">
+
+        <!-- CABEÇALHO -->
+        <header class="cabecalho">
+
+            <div class="titulo-pagina">
+
+                <div class="icone-pagina">
+                    <svg viewBox="0 0 24 24">
+                        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <span class="subtitulo">PROTÓTIPO EMPRESARIAL</span>
+                    <h1>Mapa de ativos</h1>
+                </div>
+
+            </div>
+
+            <div class="acoes-cabecalho">
+
+                <button class="botao-icone" type="button" aria-label="Pesquisar">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="10.5" cy="10.5" r="6.5"/>
+                        <path d="m16 16 4 4"/>
+                    </svg>
+                </button>
+
+                <button class="botao-icone" type="button" aria-label="Notificações">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+                    </svg>
+                </button>
+
+                <div class="usuario">
+                    <div class="icone-usuario">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="3"/>
+                            <path d="M5 20a7 7 0 0 1 14 0"/>
+                        </svg>
+                    </div>
+                    <strong>Guilherme</strong>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ÁREA DO MAPA -->
+        <section class="area-mapa">
+
+            <div class="titulo-area">
+                <h2>Última localização e último usuário do produto</h2>
+                <p>Consulte onde cada equipamento foi localizado e quem realizou o último registro.</p>
+            </div>
+
+            <div class="lista-localizacoes">
+
+                <!-- EQUIPAMENTO 1 -->
+                <article class="cartao-ativo">
+
+                    <div class="cartao-topo">
+                        <h3>Compressor de Ar Industrial</h3>
+                        <span class="status localizado">Localizado</span>
+                    </div>
+
+                    <div class="informacoes-ativo">
+                        <strong>Última localização:</strong>
+                        <a href="https://www.google.com/maps?q=-23.548920,-46.638820" target="_blank" rel="noopener noreferrer">
+                            Galpão 02 - Docas – abrir no Google Maps
+                        </a>
+                        <span class="coordenadas">-23.548920, -46.638820</span>
+                    </div>
+
+                    <p class="ultimo-usuario">
+                        <strong>Último usuário:</strong> Carlos Mendes
+                    </p>
+
+                </article>
+
+                <!-- EQUIPAMENTO 2 -->
+                <article class="cartao-ativo">
+
+                    <div class="cartao-topo">
+                        <h3>Notebook Engenharia Dell 7420</h3>
+                        <span class="status localizado">Localizado</span>
+                    </div>
+
+                    <div class="informacoes-ativo">
+                        <strong>Última localização:</strong>
+                        <a href="https://www.google.com/maps?q=-23.551004,-46.633284" target="_blank" rel="noopener noreferrer">
+                            Prédio Administrativo - 3º andar – abrir no Google Maps
+                        </a>
+                        <span class="coordenadas">-23.551004, -46.633284</span>
+                    </div>
+
+                    <p class="ultimo-usuario">
+                        <strong>Último usuário:</strong> Ana Souza
+                    </p>
+
+                </article>
+
+                <!-- EQUIPAMENTO 3 -->
+                <article class="cartao-ativo">
+
+                    <div class="cartao-topo">
+                        <h3>Projetor Epson PowerLite</h3>
+                        <span class="status sem-atualizacao">Sem atualização</span>
+                    </div>
+
+                    <div class="informacoes-ativo">
+                        <strong>Última localização:</strong>
+                        <a href="https://www.google.com/maps?q=-23.551480,-46.636120" target="_blank" rel="noopener noreferrer">
+                            Sala de Reunião B – abrir no Google Maps
+                        </a>
+                        <span class="coordenadas">-23.551480, -46.636120</span>
+                    </div>
+
+                    <p class="ultimo-usuario">
+                        <strong>Último usuário:</strong> Rafael Lima
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

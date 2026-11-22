@@ -16,8 +16,8 @@
 
 <div class="tela-sistema">
 
-    @include('partials.sidebar-icones')
-
+   @include('partials.sidebar')
+   
     <main class="conteudo-principal">
 
         <header class="cabecalho">

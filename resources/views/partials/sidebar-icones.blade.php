@@ -74,7 +74,7 @@
 
         {{-- Provisório: ainda sem tela própria --}}
         <li>
-            <a href="{{ route('ativos.index') }}">
+           <a href="{{ route('leitura.index') }}" class="{{ request()->routeIs('movimentar.create') ? 'ativo' : '' }}">
                 <svg viewBox="0 0 24 24">
                     <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-2zM14 18h2v2h-2z"/>
                 </svg>

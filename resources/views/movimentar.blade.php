@@ -2,71 +2,177 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AsseTrack - Movimentar ativo</title>
-    <link rel="stylesheet" href="{{ asset('css/ativos.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsseTrack - Registro por GPS</title>
+    <link rel="stylesheet" href="{{ asset('css/gps.css') }}">
     <style>
-        .pagina-mov { display: flex; min-height: 100vh; background: #f4f7fb; }
-        .pagina-mov .menu-lateral { position: sticky; top: 0; height: 100vh; flex-shrink: 0; }
-        .pagina-mov .conteudo-mov { flex: 1; padding: 30px; min-width: 0; font-family: Arial, sans-serif; }
-        .conteudo-mov .sub { color: #7a8aa0; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
-        .conteudo-mov h1 { margin: 0 0 24px; font-size: 28px; color: #0f1b2d; }
-        .caixa-mov { max-width: 560px; background: #fff; padding: 24px; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
-        .caixa-mov label { display: block; margin-top: 14px; font-weight: bold; font-size: 14px; color: #0f1b2d; }
-        .caixa-mov input, .caixa-mov select, .caixa-mov textarea { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccd5e3; border-radius: 8px; box-sizing: border-box; font-size: 15px; }
-        .caixa-mov input[readonly] { background: #f4f7fb; }
-        .caixa-mov button { margin-top: 20px; padding: 12px 18px; background: #0b5ed7; color: #fff; border: 0; border-radius: 8px; font-size: 15px; cursor: pointer; }
-        .erro-mov { background: #fde8ea; color: #a1212e; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
-        .voltar-mov { display: inline-block; margin-top: 16px; color: #0b5ed7; text-decoration: none; }
+        .campo select { width: 100%; padding: 12px 14px; border: 1px solid #d6deeb; border-radius: 10px; font-size: 14px; background: #fff; box-sizing: border-box; font-family: inherit; }
+        .campo input[name="descricao"] { background: #fff; }
+        .erro-mov { background: #fde8ea; color: #a1212e; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 14px; }
+        .botoes button { cursor: pointer; }
+        .gps-lateral { margin-top: auto; background: rgba(255,255,255,.06); border-radius: 14px; padding: 14px; font-size: 13px; }
+        .gps-lateral h4 { margin: 0 0 6px; font-size: 14px; }
+        .gps-lateral p { margin: 0 0 6px; opacity: .8; }
     </style>
 </head>
 <body>
-<div class="pagina-mov">
+
+<div class="tela-sistema">
 
     @include('partials.sidebar')
 
-    <main class="conteudo-mov">
-        <div class="sub">Gestão de equipamentos</div>
-        <h1>Movimentar ativo</h1>
+    <main class="conteudo-principal">
 
-        <div class="caixa-mov">
-
-            @if ($errors->any())
-                <div class="erro-mov">
-                    @foreach ($errors->all() as $erro)
-                        <div>{{ $erro }}</div>
-                    @endforeach
+        <header class="cabecalho">
+            <div class="titulo-pagina">
+                <div class="icone-pagina">▦</div>
+                <div>
+                    <span class="subtitulo">PROTÓTIPO EMPRESARIAL</span>
+                    <h1>Registro por GPS</h1>
                 </div>
-            @endif
+            </div>
 
-            <form method="POST" action="{{ route('movimentar.store') }}">
-                @csrf
-                <input type="hidden" name="ativo_id" value="{{ $ativo->id }}">
+            <div class="acoes-cabecalho">
+                <button class="icone-botao" type="button">⌕</button>
+                <button class="icone-botao" type="button">♧</button>
+                <div class="usuario">
+                    <div class="usuario-icone">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
+                    <span>{{ auth()->user()->name }}</span>
+                </div>
+            </div>
+        </header>
 
-                <label>Ativo</label>
-                <input value="{{ $ativo->nome }} ({{ $ativo->patrimonio }})" readonly>
+        <div class="area-conteudo">
 
-                <label>Local atual</label>
-                <input value="{{ $ativo->local?->nome ?? 'Não registrado' }}" readonly>
+            <section class="caixa-registro">
 
-                <label>Novo local</label>
-                <select name="local_novo_id" required>
-                    <option value="">Selecione...</option>
-                    @foreach ($locais as $local)
-                        <option value="{{ $local->id }}">{{ $local->nome }}</option>
-                    @endforeach
-                </select>
+                <h3>Registro de localização por GPS</h3>
+                <p class="descricao">
+                    Confirmação da posição do equipamento após leitura do QR Code
+                </p>
 
-                <label>Observação</label>
-                <textarea name="descricao" rows="3"></textarea>
+                @if ($errors->any())
+                    <div class="erro-mov">
+                        @foreach ($errors->all() as $erro)
+                            <div>{{ $erro }}</div>
+                        @endforeach
+                    </div>
+                @endif
 
-                <button type="submit">Confirmar movimentação</button>
-            </form>
+                <form method="POST" action="{{ route('movimentar.store') }}">
+                    @csrf
+                    <input type="hidden" name="ativo_id" value="{{ $ativo->id }}">
 
-            <a class="voltar-mov" href="{{ route('ativos.show', $ativo->id) }}">← Voltar aos detalhes do ativo</a>
+                    <div class="campos">
+
+                        <div class="campo">
+                            <label>Ativo</label>
+                            <input type="text" value="{{ $ativo->nome }}" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Código / patrimônio</label>
+                            <input type="text" value="{{ $ativo->patrimonio }}" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Local atual</label>
+                            <input type="text" value="{{ $ativo->local?->nome ?? 'Não registrado' }}" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Novo local</label>
+                            <select name="local_novo_id" id="novo-local" required>
+                                <option value="">Selecione...</option>
+                                @foreach ($locais as $local)
+                                    <option value="{{ $local->id }}" @selected(old('local_novo_id') == $local->id)>{{ $local->nome }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label>Observação</label>
+                            <input type="text" name="descricao" value="{{ old('descricao') }}" maxlength="255" placeholder="Opcional">
+                        </div>
+
+                        <div class="campo">
+                            <label>Data/hora</label>
+                            <input type="text" value="{{ now()->format('d/m/Y H:i') }}" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="aviso-gps">
+                        <div class="icone-gps">◔</div>
+                        <div>
+                            <strong>Localização informada manualmente</strong>
+                            <p>O GPS em tempo real não está ativo nesta versão. Escolha o novo local na lista.</p>
+                        </div>
+                    </div>
+
+                    <div class="botoes">
+                        <button class="botao-confirmar" type="submit">
+                            ◎ Confirmar localização
+                        </button>
+
+                        <button class="botao-nova-captura" type="reset" onclick="atualizarStatus('')">
+                            ↻ Limpar escolha
+                        </button>
+                    </div>
+                </form>
+
+            </section>
+
+            <aside class="caixa-status">
+
+                <h3>Coleta móvel</h3>
+
+                <div class="status-item">
+                    <div class="status-icone">▧</div>
+                    <div>
+                        <strong>QR Code lido</strong>
+                        <p>{{ $ativo->patrimonio }}</p>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <div class="status-icone">▯</div>
+                    <div>
+                        <strong>Local atual</strong>
+                        <p>{{ $ativo->local?->nome ?? 'Não registrado' }}</p>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <div class="status-icone">♧</div>
+                    <div>
+                        <strong>Posição a registrar</strong>
+                        <p id="status-novo">Aguardando escolha</p>
+                    </div>
+                </div>
+
+            </aside>
+
         </div>
+
     </main>
 
 </div>
+
+<script>
+    const select = document.getElementById('novo-local');
+    const status = document.getElementById('status-novo');
+
+    function atualizarStatus(valor) {
+        status.textContent = valor || 'Aguardando escolha';
+    }
+
+    select.addEventListener('change', () => {
+        const opcao = select.options[select.selectedIndex];
+        atualizarStatus(select.value ? opcao.text : '');
+    });
+
+    if (select.value) atualizarStatus(select.options[select.selectedIndex].text);
+</script>
 </body>
 </html>

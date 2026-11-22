@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsseTrack - Registro por GPS</title>
+    <link rel="stylesheet" href="gps.css">
+</head>
+
+<body>
+
+    <div class="tela-sistema">
+
+        <!-- MENU LATERAL -->
+        <aside class="menu-lateral">
+
+            <div class="logo">
+                <div class="logo-icone">◎</div>
+                <div>
+                    <h2>AsseTrack</h2>
+                    <p>Gestão de ativos</p>
+                </div>
+            </div>
+
+            <ul class="lista-menu">
+                <li><a href="login.html"><span>♙</span> Login</a></li>
+                <li><a href="dashboard.html"><span>▦</span> Dashboard</a></li>
+                <li><a href="ativos.html"><span>▤</span> Lista de ativos</a></li>
+                <li><a href="cadastro.html"><span>＋</span> Cadastro de ativo</a></li>
+                <li><a href="detalhes.html"><span>◇</span> Detalhes do ativo</a></li>
+                <li><a href="leitura.html"><span>▧</span> Leitura de QR Code</a></li>
+                <li><a href="gps.html" class="ativo"><span>⌖</span> Registro por GPS</a></li>
+                <li><a href="mapa.html"><span>▧</span> Mapa de ativos</a></li>
+                <li><a href="historico.html"><span>◷</span> Histórico</a></li>
+            </ul>
+
+            <div class="informacao-menu">
+                <strong><span>◈</span> QR + GPS ativo</strong>
+                <p>Registros móveis sincronizados com mapa corporativo em tempo real.</p>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="conteudo-principal">
+
+            <!-- CABEÇALHO -->
+            <header class="cabecalho">
+
+                <div class="titulo-pagina">
+                    <div class="icone-pagina">▦</div>
+
+                    <div>
+                        <span class="subtitulo">PROTÓTIPO EMPRESARIAL</span>
+                        <h1>Registro por GPS</h1>
+                    </div>
+                </div>
+
+                <div class="acoes-cabecalho">
+                    <button class="icone-botao" type="button">⌕</button>
+                    <button class="icone-botao" type="button">♧</button>
+
+                    <div class="usuario">
+                        <div class="usuario-icone">G</div>
+                        <span>Guilherme</span>
+                    </div>
+                </div>
+
+            </header>
+
+            <!-- ÁREA DE CONTEÚDO -->
+            <div class="area-conteudo">
+
+                <!-- CARTÃO DE REGISTRO -->
+                <section class="caixa-registro">
+
+                    <h3>Registro de localização por GPS</h3>
+
+                    <p class="descricao">
+                        Confirmação da posição coletada pelo celular após leitura do QR Code
+                    </p>
+
+                    <div class="campos">
+
+                        <div class="campo">
+                            <label>Ativo</label>
+                            <input type="text" value="Compressor de Ar Industrial" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Código / patrimônio</label>
+                            <input type="text" value="PAT-0248" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Latitude</label>
+                            <input type="text" value="-23.548920" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Longitude</label>
+                            <input type="text" value="-46.638820" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Local detectado</label>
+                            <input type="text" value="Galpão 02 - Docas" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Data/hora</label>
+                            <input type="text" value="21/09/2026 10:42" readonly>
+                        </div>
+
+                    </div>
+
+                    <!-- PRECISÃO DO GPS -->
+                    <div class="aviso-gps">
+
+                        <div class="icone-gps">◔</div>
+
+                        <div>
+                            <strong>Precisão estimada: 7 metros</strong>
+                            <p>Sinal GPS estável e autorizado pelo usuário.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- BOTÕES -->
+                    <div class="botoes">
+
+                        <button class="botao-confirmar" type="button">
+                            ◎ Confirmar localização
+                        </button>
+
+                        <button class="botao-nova-captura" type="button">
+                            ↻ Capturar novamente
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <!-- PAINEL DE COLETA MÓVEL -->
+                <aside class="caixa-status">
+
+                    <h3>Coleta móvel</h3>
+
+                    <div class="status-item">
+                        <div class="status-icone">▧</div>
+
+                        <div>
+                            <strong>QR Code lido</strong>
+                            <p>AST-QRC-2048</p>
+                        </div>
+                    </div>
+
+                    <div class="status-item">
+                        <div class="status-icone">▯</div>
+
+                        <div>
+                            <strong>GPS autorizado</strong>
+                            <p>Permissão concedida</p>
+                        </div>
+                    </div>
+
+                    <div class="status-item">
+                        <div class="status-icone">♧</div>
+
+                        <div>
+                            <strong>Posição registrada</strong>
+                            <p>Galpão 02 - Docas</p>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

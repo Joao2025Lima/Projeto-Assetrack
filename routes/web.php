@@ -9,6 +9,8 @@ use App\Http\Controllers\AtivoController;
 use App\Http\Controllers\HistoricoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MovimentacaoController;
+use App\Http\Controllers\MapaController;
+use App\Http\Controllers\LeituraController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
@@ -21,6 +23,9 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 Route::middleware('auth')->group(function () {
+
+        // MAPA DE ATIVOS (última localização e último usuário)
+    Route::get('/mapa', [MapaController::class, 'index'])->name('mapa.index');
     
         // MOVIMENTAÇÃO
     Route::get('/movimentar/{ativo}', [MovimentacaoController::class, 'create'])->name('movimentar.create');
@@ -82,6 +87,10 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/ativos/{id}', [AtivoController::class, 'destroy'])
         ->name('ativos.destroy');
+        
+    // LEITURA DE QR CODE PELA CÂMERA
+    Route::get('/leitura', [LeituraController::class, 'index'])->name('leitura.index');
+    Route::post('/leitura/buscar', [LeituraController::class, 'buscar'])->name('leitura.buscar');
 
     // LEITURA DE QR CODE
     Route::get('/leitura/{id}', [AtivoController::class, 'show'])

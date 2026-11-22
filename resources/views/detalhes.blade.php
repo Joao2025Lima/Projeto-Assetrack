@@ -153,7 +153,7 @@
                         <span>Escaneie para abrir o registro do ativo</span>
                     </div>
 
-                    <a href="{{ route('leitura.qrcode', $ativo->id) }}" class="botao-ler">
+                    <a href="{{ route('leitura.index' ) }}" class="botao-ler">
                         <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h2v2h-2zM18 14h2v6h-2zM14 18h2v2h-2z"/></svg>
                         Ler QR Code
                     </a>

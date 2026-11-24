@@ -626,3 +626,69 @@ body {
         margin-left: auto;
     }
 }
+
+
+.moldura-camera {
+    overflow: hidden;
+}
+
+#leitor {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+    z-index: 2;
+}
+
+#leitor video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.botao-fechar-camera {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 5;
+    padding: 8px 11px;
+    border: none;
+    border-radius: 6px;
+    background: #d93025;
+    color: white;
+    cursor: pointer;
+}
+
+.canto {
+    z-index: 3;
+    pointer-events: none;
+}
+
+.qr-simbolo {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 650px) {
+    .ferramentas-leitura {
+        flex-direction: column;
+    }
+
+    .ferramentas-leitura input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .ferramentas-leitura button {
+        min-height: 44px;
+    }
+
+    .moldura-camera {
+        max-width: 100%;
+    }
+}

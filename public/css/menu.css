@@ -174,3 +174,97 @@
     width: 100%;
     flex: 1 1 100%;
 }
+
+
+/* CORREÇÃO DO MENU NO CELULAR - DASHBOARD */
+
+@media screen and (max-width: 650px) {
+
+    .menu-unico {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0;
+        width: 250px !important;
+        min-width: 250px !important;
+        max-width: 85vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh;
+        overflow-y: auto !important;
+        overflow-x: hidden;
+        z-index: 1000;
+        padding: 70px 14px 22px !important;
+        align-self: auto;
+    }
+
+    .menu-toggle {
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+        z-index: 1001 !important;
+    }
+
+    .tela-sistema > .conteudo-principal {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+
+/* CORREÇÃO DO MENU NA TELA DE HISTÓRICO */
+
+.pagina-historico.menu-fechado > .menu-unico {
+    display: none !important;
+}
+
+.pagina-historico:not(.menu-fechado) > .menu-unico {
+    display: flex;
+    padding-top: 70px;
+}
+
+.pagina-historico.menu-fechado > .conteudo-hist {
+    width: 100%;
+    flex: 1 1 100%;
+    min-width: 0;
+}
+
+/* AJUSTE DO HISTÓRICO NO CELULAR */
+@media screen and (max-width: 650px) {
+    .pagina-historico .menu-unico {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0;
+        width: 250px !important;
+        min-width: 250px !important;
+        max-width: 85vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        overflow-y: auto !important;
+        z-index: 1000;
+        padding: 70px 14px 22px !important;
+    }
+
+    .pagina-historico .menu-toggle {
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+        z-index: 1001 !important;
+    }
+
+    .pagina-historico .conteudo-hist {
+        width: 100%;
+        min-width: 0;
+        padding: 75px 16px 20px;
+    }
+
+    .pagina-historico .caixa-hist {
+        overflow-x: auto;
+    }
+
+    .pagina-historico table.tab-hist {
+        min-width: 650px;
+    }
+}
+

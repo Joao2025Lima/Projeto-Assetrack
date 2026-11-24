@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 
 <!-- Botão para abrir e fechar o menu -->
-<button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+<button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
     ☰
 </button>
 
@@ -121,15 +121,20 @@
 <!-- Funcionamento do botão -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+
     const menu = document.querySelector('.menu-unico');
-    const tela = document.querySelector('.tela-sistema');
     const botao = document.getElementById('menuToggle');
 
-    if (!menu || !tela || !botao) return;
+    if (!menu || !botao) return;
+
+    const tela = menu.closest('.tela-sistema, .pagina-historico');
+
+    if (!tela) return;
 
     tela.classList.add('menu-fechado');
 
     botao.addEventListener('click', function () {
+
         tela.classList.toggle('menu-fechado');
 
         const fechado = tela.classList.contains('menu-fechado');
@@ -140,6 +145,12 @@ document.addEventListener('DOMContentLoaded', function () {
             'aria-label',
             fechado ? 'Abrir menu' : 'Fechar menu'
         );
+
+        botao.setAttribute(
+            'aria-expanded',
+            fechado ? 'false' : 'true'
+        );
     });
+
 });
 </script>

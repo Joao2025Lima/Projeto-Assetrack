@@ -5,9 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AsseTrack - Login</title>
-
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 
@@ -15,14 +13,16 @@
 
 <div class="tela-sistema">
 
-    
+    <!-- BOTÃO DO MENU MOBILE -->
+    <button type="button" class="menu-toggle" id="menuToggle"
+        aria-label="Abrir menu" aria-expanded="false">
+        ☰
+    </button>
 
     <!-- MENU LATERAL -->
-
     <nav class="menu-lateral">
 
         <div class="logo">
-
             <div class="logo-icone">
                 <svg viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="9"/>
@@ -36,7 +36,6 @@
                 <h2>AsseTrack</h2>
                 <p>Gestão de ativos</p>
             </div>
-
         </div>
 
         <ul class="lista-menu">
@@ -150,10 +149,7 @@
     </nav>
 
     <!-- CONTEÚDO PRINCIPAL -->
-
     <main class="conteudo-principal">
-
-        <!-- CABEÇALHO -->
 
         <header class="cabecalho">
 
@@ -189,7 +185,6 @@
                 </button>
 
                 <div class="usuario">
-
                     <div class="icone-usuario">
                         <svg viewBox="0 0 24 24">
                             <circle cx="12" cy="8" r="3"/>
@@ -198,18 +193,13 @@
                     </div>
 
                     <strong>Guilherme</strong>
-
                 </div>
 
             </div>
 
         </header>
 
-        <!-- ÁREA DE LOGIN -->
-
         <section class="area-login">
-
-            <!-- FORMULÁRIO -->
 
             <div class="painel-login">
 
@@ -272,6 +262,7 @@
 
                     <div class="informacao-login">
                         <span>Autenticação empresarial habilitada</span>
+
                         <a href="#" onclick="alert('A recuperação de senha será implementada posteriormente.'); return false;">
                             Recuperar senha
                         </a>
@@ -290,8 +281,6 @@
 
             </div>
 
-            <!-- PAINEL INFORMATIVO -->
-
             <div class="painel-informativo">
 
                 <span class="etiqueta">QR Code + GPS</span>
@@ -306,38 +295,29 @@
                 <div class="recursos">
 
                     <div class="recurso">
-
                         <svg viewBox="0 0 24 24">
                             <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-2zM14 18h2v2h-2z"/>
                         </svg>
-
                         <h3>Escaneie</h3>
                         <p>Identificação pelo QR do ativo.</p>
-
                     </div>
 
                     <div class="recurso">
-
                         <svg viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="3"/>
                             <circle cx="12" cy="12" r="8"/>
                             <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
                         </svg>
-
                         <h3>Registre</h3>
                         <p>GPS captura latitude e longitude.</p>
-
                     </div>
 
                     <div class="recurso">
-
                         <svg viewBox="0 0 24 24">
                             <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/>
                         </svg>
-
                         <h3>Acompanhe</h3>
                         <p>Mapa e histórico atualizados.</p>
-
                     </div>
 
                 </div>
@@ -349,6 +329,27 @@
     </main>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const tela = document.querySelector('.tela-sistema');
+    const botao = document.getElementById('menuToggle');
+
+    if (!tela || !botao) return;
+
+    botao.addEventListener('click', function () {
+
+        const aberto = tela.classList.toggle('menu-aberto');
+
+        botao.textContent = aberto ? '✕' : '☰';
+        botao.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+        botao.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+
+    });
+
+});
+</script>
 
 </body>
 </html>

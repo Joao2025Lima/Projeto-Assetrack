@@ -1,31 +1,176 @@
-.menu-unico, .menu-unico * { box-sizing: border-box; }
+
+.menu-unico,
+.menu-unico * {
+    box-sizing: border-box;
+}
 
 .menu-unico {
-    width: 250px; min-width: 250px; max-width: 250px;
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
     flex: 0 0 250px;
-    height: 100vh; position: sticky; top: 0; align-self: flex-start;
-    display: flex; flex-direction: column;
-    background: #0b2140; color: #fff;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    background: #0b2140;
+    color: #fff;
     padding: 22px 14px;
-    font-family: Inter, Arial, sans-serif; font-size: 14px;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 14px;
     overflow-y: auto;
 }
-.mu-logo { display: flex; align-items: center; gap: 12px; padding: 0 8px 20px; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 16px; }
-.mu-logo-icone { width: 38px; height: 38px; border-radius: 10px; background: #1e7fe0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.mu-logo-icone svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.8; }
-.mu-logo h2 { margin: 0; font-size: 18px; color: #fff; line-height: 1.1; }
-.mu-logo p { margin: 2px 0 0; font-size: 11px; color: #9fb4d3; }
 
-.mu-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-.mu-lista a { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: #dbe6f5; text-decoration: none; font-size: 14px; }
-.mu-lista a:hover { background: rgba(255,255,255,.07); }
-.mu-lista a.ativo { background: #1b3a66; color: #fff; }
-.mu-lista svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.mu-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 16px;
+}
 
-.mu-info { margin-top: auto; padding: 14px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
-.mu-info strong { display: block; font-size: 13px; color: #fff; margin-bottom: 6px; }
-.mu-info p { margin: 0; font-size: 12px; color: #b4c4dc; line-height: 1.4; }
+.mu-logo-icone {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #1e7fe0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
 
-/* mesmo layout em todas as telas */
-.tela-sistema { display: flex !important; min-height: 100vh; }
-.tela-sistema > .conteudo-principal { flex: 1 1 auto; min-width: 0; width: auto !important; margin-left: 0 !important; }
+.mu-logo-icone svg {
+    width: 22px;
+    height: 22px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 1.8;
+}
+
+.mu-logo h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.mu-logo p {
+    margin: 2px 0 0;
+    font-size: 11px;
+    color: #9fb4d3;
+}
+
+.mu-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mu-lista a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    color: #dbe6f5;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.mu-lista a:hover {
+    background: rgba(255,255,255,.07);
+}
+
+.mu-lista a.ativo {
+    background: #1b3a66;
+    color: #fff;
+}
+
+.mu-lista svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.mu-info {
+    margin-top: auto;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+.mu-info strong {
+    display: block;
+    font-size: 13px;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.mu-info p {
+    margin: 0;
+    font-size: 12px;
+    color: #b4c4dc;
+    line-height: 1.4;
+}
+
+/* Layout principal */
+.tela-sistema {
+    display: flex !important;
+    min-height: 100vh;
+}
+
+.tela-sistema > .conteudo-principal {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto !important;
+    margin-left: 0 !important;
+}
+
+/* Botão de abrir e fechar */
+.menu-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1001;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 9px;
+    background: #1e7fe0;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Menu fechado */
+.tela-sistema.menu-fechado > .menu-unico {
+    display: none !important;
+}
+
+/* Menu aberto */
+.tela-sistema:not(.menu-fechado) > .menu-unico {
+    display: flex;
+    padding-top: 70px;
+}
+
+/* Conteúdo quando menu fechado */
+.tela-sistema.menu-fechado > .conteudo-principal {
+    width: 100%;
+    flex: 1 1 100%;
+}

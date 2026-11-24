@@ -38,9 +38,13 @@ class MovimentacaoController extends Controller
                 'data_movimentacao' => now(),
             ]);
 
-            $ativo->update(['local_id' => $dados['local_novo_id']]);
+            $ativo->update([
+                'local_id' => $dados['local_novo_id'],
+            ]);
         });
 
-        return redirect('/')->with('sucesso', 'Movimentação registrada!');
+        return redirect()
+            ->route('dashboard')
+            ->with('sucesso', 'Movimentação registrada!');
     }
 }

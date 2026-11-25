@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -11,24 +12,38 @@ use App\Http\Controllers\MovimentacaoController;
 use App\Http\Controllers\MapaController;
 use App\Http\Controllers\LeituraController;
 
+// CADASTRO DE USUÁRIOS
+Route::get('/cadastro', [AuthController::class, 'showRegister'])
+    ->name('cadastro');
+
+Route::post('/cadastro', [AuthController::class, 'register'])
+    ->name('cadastro.post');
+
+// LOGIN
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login.post');
 
+// LOGOUT
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
+// ROTAS PROTEGIDAS
 Route::middleware('auth')->group(function () {
 
-        // MAPA DE ATIVOS (última localização e último usuário)
-    Route::get('/mapa', [MapaController::class, 'index'])->name('mapa.index');
-    
-        // MOVIMENTAÇÃO
-    Route::get('/movimentar/{ativo}', [MovimentacaoController::class, 'create'])->name('movimentar.create');
-    Route::post('/movimentar', [MovimentacaoController::class, 'store'])->name('movimentar.store');
+    // MAPA DE ATIVOS
+    Route::get('/mapa', [MapaController::class, 'index'])
+        ->name('mapa.index');
+
+    // MOVIMENTAÇÃO
+    Route::get('/movimentar/{ativo}', [MovimentacaoController::class, 'create'])
+        ->name('movimentar.create');
+
+    Route::post('/movimentar', [MovimentacaoController::class, 'store'])
+        ->name('movimentar.store');
 
     // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])
@@ -66,9 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/locais/{id}', [LocalController::class, 'destroy'])
         ->name('locais.destroy');
 
-    // EQUIPAMENTOS (ATIVOS)
-
-    // Cadastro precisa vir antes da rota /ativos/{id}
+    // EQUIPAMENTOS
     Route::get('/ativos/create', [AtivoController::class, 'create'])
         ->name('ativos.create');
 
@@ -86,12 +99,14 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/ativos/{id}', [AtivoController::class, 'destroy'])
         ->name('ativos.destroy');
-        
-    // LEITURA DE QR CODE PELA CÂMERA
-    Route::get('/leitura', [LeituraController::class, 'index'])->name('leitura.index');
-    Route::post('/leitura/buscar', [LeituraController::class, 'buscar'])->name('leitura.buscar');
 
     // LEITURA DE QR CODE
+    Route::get('/leitura', [LeituraController::class, 'index'])
+        ->name('leitura.index');
+
+    Route::post('/leitura/buscar', [LeituraController::class, 'buscar'])
+        ->name('leitura.buscar');
+
     Route::get('/leitura/{id}', [AtivoController::class, 'show'])
         ->name('leitura.qrcode');
 
@@ -108,5 +123,5 @@ Route::middleware('auth')->group(function () {
 
 // PÁGINA INICIAL
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/cadastro');
 });

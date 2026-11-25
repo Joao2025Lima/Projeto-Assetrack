@@ -13,13 +13,11 @@
 
 <div class="tela-sistema">
 
-    <!-- BOTÃO DO MENU MOBILE -->
     <button type="button" class="menu-toggle" id="menuToggle"
         aria-label="Abrir menu" aria-expanded="false">
         ☰
     </button>
 
-    <!-- MENU LATERAL -->
     <nav class="menu-lateral">
 
         <div class="logo">
@@ -148,7 +146,6 @@
 
     </nav>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo-principal">
 
         <header class="cabecalho">
@@ -221,8 +218,14 @@
 
                 </div>
 
+                @if (session('status'))
+                    <div class="alerta-sucesso">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
                 @if ($errors->any())
-                    <div class="mensagem-erro">
+                    <div class="alerta-erro">
                         @foreach ($errors->all() as $error)
                             <p>{{ $error }}</p>
                         @endforeach
@@ -278,6 +281,14 @@
                     </button>
 
                 </form>
+
+                <div style="text-align:center; margin-top:25px; font-size:13px; color:#687588;">
+                    Ainda não possui uma conta?
+                    <a href="{{ route('cadastro') }}"
+                       style="color:#1767ad; font-weight:bold; text-decoration:none;">
+                        Criar conta
+                    </a>
+                </div>
 
             </div>
 

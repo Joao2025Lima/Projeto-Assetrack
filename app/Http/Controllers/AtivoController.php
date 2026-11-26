@@ -120,7 +120,7 @@ class AtivoController extends Controller
 
         return redirect()->route('ativos.create')
             ->with('sucesso', 'Equipamento cadastrado com sucesso!')
-            ->with('qrCode', Storage::disk('public')->url($caminhoQrCode))
+           ->with('qrCode', 'data:image/svg+xml;base64,' . base64_encode($qrCode))
             ->with('codigoEtiqueta', $ativo->patrimonio);
     }
 

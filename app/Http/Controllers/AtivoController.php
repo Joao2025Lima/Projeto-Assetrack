@@ -188,15 +188,28 @@ class AtivoController extends Controller
         ]);
     }
 
+    
     // EXCLUIR EQUIPAMENTO
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $ativo = Ativo::findOrFail($id);
 
+        // Exclui o arquivo do QR Code, se existir
+        if ($ativo->qr_code) {
+            Storage::disk('public')->delete($ativo->qr_code);
+        }
+
+        // Os históricos vinculados serão excluídos em cascata
         $ativo->delete();
 
-        return response()->json([
-            'mensagem' => 'Equipamento excluído com sucesso!'
-        ]);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'mensagem' => 'Equipamento excluído com sucesso!'
+            ]);
+        }
+
+        return redirect()->route('ativos.index')
+            ->with('sucesso', 'Ativo excluído com sucesso!');
     }
+
 }

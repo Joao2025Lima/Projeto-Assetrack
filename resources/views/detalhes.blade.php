@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -162,6 +163,25 @@
                         <svg viewBox="0 0 24 24"><path d="m12 3 2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3Z"/></svg>
                         Movimentar ativo
                     </a>
+
+                    <!-- BOTÃO PARA EXCLUIR ATIVO -->
+                    <form
+                        action="{{ route('ativos.destroy', $ativo->id) }}"
+                        method="POST"
+                        onsubmit="return confirm('Tem certeza de que deseja excluir este ativo? Esta ação não poderá ser desfeita.');"
+                        style="margin-top: 15px;"
+                    >
+                        @csrf
+                        @method('DELETE')
+
+                        <button
+                            type="submit"
+                            style="width: 100%; padding: 13px; background: #dc2626; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px;"
+                        >
+                            Excluir ativo
+                        </button>
+                    </form>
+
                 </section>
 
                 <section class="painel localizacao-atual">

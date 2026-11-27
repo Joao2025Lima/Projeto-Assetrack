@@ -13,7 +13,17 @@ class Local extends Model
         'nome',
         'setor',
         'descricao',
+        'latitude',
+        'longitude',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'latitude' => 'float',
+            'longitude' => 'float',
+        ];
+    }
 
     public function ativos(): HasMany
     {

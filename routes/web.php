@@ -37,6 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/mapa', [MapaController::class, 'index'])
         ->name('mapa.index');
 
+     // Dados do mapa em JSON (atualização em tempo real)       // ← ADICIONAR
+    Route::get('/mapa/dados', [MapaController::class, 'dados'])  // ← ADICIONAR
+        ->name('mapa.dados'); 
+
     // MOVIMENTAÇÃO
     Route::get('/movimentar/{ativo}', [MovimentacaoController::class, 'create'])
         ->name('movimentar.create');
@@ -79,6 +83,10 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/locais/{id}', [LocalController::class, 'destroy'])
         ->name('locais.destroy');
+
+     // Definir a posição do local no mapa                                              // ← ADICIONAR
+    Route::put('/locais/{id}/coordenadas', [LocalController::class, 'coordenadas'])    // ← ADICIONAR
+        ->name('locais.coordenadas');    
 
     // EQUIPAMENTOS
     Route::get('/ativos/create', [AtivoController::class, 'create'])

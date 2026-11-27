@@ -59,6 +59,24 @@ class LocalController extends Controller
         ]);
     }
 
+        // Definir a posição (latitude/longitude) de um local no mapa
+    public function coordenadas(Request $request, $id)
+    {
+        $local = Local::findOrFail($id);
+
+        $dados = $request->validate([
+            'latitude' => ['required', 'numeric', 'between:-90,90'],
+            'longitude' => ['required', 'numeric', 'between:-180,180'],
+        ]);
+
+        $local->update($dados);
+
+        return response()->json([
+            'mensagem' => 'Posição do local salva com sucesso!',
+            'local' => $local
+        ]);
+    }
+
     // Excluir local
     public function destroy($id)
     {
